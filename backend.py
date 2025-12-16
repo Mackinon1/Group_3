@@ -3,14 +3,9 @@ import math
 import time
 import pandas as pd
 
-# ----------------------------
-# Simulation speed
-# ----------------------------
-SIMULATION_STEP = 0.2
 
-# ----------------------------
-# Locations dictionary
-# ----------------------------
+SIMULATION_STEP = 0.2 # simulation speed
+
 locations_coords = {
     "Kisumu": (10, 20),
     "Nyeri": (50, 75),
@@ -19,9 +14,6 @@ locations_coords = {
     "Mombasa": (95, 95)
 }
 
-# ----------------------------
-# Helper functions
-# ----------------------------
 def distance(a, b):
     return math.hypot(a[0]-b[0], a[1]-b[1])
 
@@ -43,9 +35,6 @@ def select_location(prompt):
             return locations_coords[loc_name]
         print(f"Invalid location. Options: {', '.join(locations_coords.keys())}")
 
-# ----------------------------
-# User classes
-# ----------------------------
 class User:
     def __init__(self, name):
         self.name = name
@@ -93,9 +82,6 @@ class Engineer(User):
     def authenticate(self):
         return self.passcode == "eng123"
 
-# ----------------------------
-# Base Station class
-# ----------------------------
 class BaseStation:
     def __init__(self, name, location):
         self.name = name
@@ -103,16 +89,10 @@ class BaseStation:
         self.status = "Active"
         self.connected_drivers = []
         self.connected_passengers = []
-
-# ----------------------------
-# Global lists
-# ----------------------------
-drivers_list = []
+drivers_list = [] # Global lists
 passengers_list = []
 
-# ----------------------------
 # Base stations
-# ----------------------------
 base_stations = [
     BaseStation("Aswan Station", locations_coords["Kisumu"]),
     BaseStation("Cairo Station", locations_coords["Nyeri"]),
@@ -121,9 +101,7 @@ base_stations = [
     BaseStation("Alexandria Station", locations_coords["Mombasa"])
 ]
 
-# ----------------------------
 # Passenger function
-# ----------------------------
 def passenger(drivers_list, passengers_list, location_names_map):
     while True:
         try:
@@ -215,9 +193,7 @@ def passenger(drivers_list, passengers_list, location_names_map):
         else:
             print("Invalid choice, try again.")
 
-# ----------------------------
 # Driver function
-# ----------------------------
 def driver(drivers_list, passengers_list, location_names_map):
     while True:
         try:
@@ -309,9 +285,7 @@ def driver(drivers_list, passengers_list, location_names_map):
         else:
             print("Invalid choice. Try again.")
 
-# ----------------------------
 # Admin function
-# ----------------------------
 def admin(passengers_list, drivers_list, base_stations):
     username = input("Enter admin username: ").strip()
     password = input("Enter admin passcode: ").strip()
@@ -417,9 +391,7 @@ def admin(passengers_list, drivers_list, base_stations):
         else:
             print("Invalid choice.")
 
-# ----------------------------
 # Engineer function
-# ----------------------------
 def engineer(base_stations):
     username = input("Enter engineer username: ").strip()
     passcode = input("Enter engineer passcode: ").strip()
